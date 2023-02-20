@@ -3,9 +3,10 @@ import "./style.css";
 const form = document.querySelector("form");
 
 form.addEventListener("submit", async (e) => {
-      showSpinner();
       e.preventDefault();
+      showSpinner();
       const data = new FormData(form);
+
       const response = await fetch("http://localhost:8080/dream", {
             method: "POST",
             headers: {
@@ -15,9 +16,18 @@ form.addEventListener("submit", async (e) => {
                   prompt: data.get("prompt"),
             }),
       });
-      const { image } = await response.json();
-      const result = document.querySelector("#result");
-      result.innerHTML = `<img src="${image}" width="512" />`;
+
+      if (response.ok) {
+            const { image } = await response.json();
+
+            const result = document.querySelector("#result");
+            result.innerHTML = `<img src="${image}" width="512" />`;
+      } else {
+            const err = await response.text();
+            alert(err);
+            console.error(err);
+      }
+
       hideSpinner();
 });
 
