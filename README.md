@@ -1,4 +1,4 @@
-# Dream-App
+# Dream App
 Image generator using DALL·E. Vanilla JavaScript app with Vite. 
 
 Head to [DALL·E Image Generation Docs](https://platform.openai.com/docs/guides/images) to log in and create an API key.
